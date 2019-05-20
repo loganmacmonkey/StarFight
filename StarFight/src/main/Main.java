@@ -4,7 +4,6 @@ package main;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.IOException;
 
 import types.Ship;
 
@@ -18,15 +17,26 @@ public class Main {
 	
 	static int TA=0;
 	
+	//The Window (The JFrame)
 	static JFrame f;
+	
+	//The Panel everything gets drawn to.
 	static JPanel p = new JPanel();
+	
+	//The way things are going to be added
+	//to the Main Panel which makes it so you
+	//can have several different panels switch
+	//out on top of it.
 	static CardLayout CL = new CardLayout();
+	
+	//Runs on Start-Up.
+	public static void main(String[] args)
+	{new Main();}
 	
 	//Setup & Launching the Panel which finds how many turns
 	//you'd like to decide at a time
 	public Main()
 	{
-		
 		//stores the Height & Width of the Screen.
 		int SWidth = (int) getWidth();
 		int SHeight = (int) getHeight(); 
@@ -56,12 +66,8 @@ public class Main {
 		f.setVisible(true);
 	}
 	
-	//Runs on Start-Up.
-	public static void main(String[] args)
-	{new Main();}
-	
 	//After getting how many turns you'd like to decide
-	//at a time, ask which ships P1 & P2 would lie to use.
+	//at a time, ask which ships P1 & P2 would like to use.
 	public static void proceed1(int turns)
 	{
 		TA = turns;
@@ -69,8 +75,8 @@ public class Main {
 		CL.show(p, "2a");
 	}
 	
-	//After getting which ships P1 & P2 would lie to
-	//use, start the game
+	//After getting which ships P1 & P2 would 
+	//like to use, start the game.
 	public static void proceed2(Ship P1, Ship P2)
 	{
 		new Game(TA,P1,P2);

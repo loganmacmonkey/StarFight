@@ -12,8 +12,7 @@ public class GameBoard {
 	public GameBoard()
 	{
 		paintGameBoard PGB  = new paintGameBoard();
-		Game.getGamePane().add(PGB);
-		//Game.addComp(PGB,0,0,GridBagConstraints.REMAINDER,2,0,0,GridBagConstraints.NORTH,1,0,0,0,0);
+		Game.addComp(PGB,2,1,1,1,10,2,GridBagConstraints.CENTER, GridBagConstraints.NONE,5,2,5,2);
 	}
 	
 	private class paintGameBoard extends JComponent
