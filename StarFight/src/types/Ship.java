@@ -13,13 +13,13 @@ import javax.swing.JComponent;
 public class Ship {
 	
 	private String color = "B&W";
+	private Boolean MovingRight;
 	private int colorNum = 0;
 	private BufferedImage ship;
 	private double x = 0;
 	private double y = 0;
 	private double rotation = 0.00;
 	private double scale = 20.0;
-	private int player = 0;
 	
 	//Creates Ship
 	public Ship(String color, int x, int y)
@@ -92,60 +92,6 @@ public class Ship {
 		this.x = x;
 		this.y = y;
 		this.rotation = rotation;
-	}
-	//Creates Ship
-	public Ship(int colorNum, int x, int y, int rotation, int player)
-	{
-		this.color = getColor(colorNum);
-		this.colorNum = colorNum;
-		try {
-			this.ship = ImageIO.read(new File(getColor()+" Ship.png"));
-			} catch (IOException e) {}
-		this.x = x;
-		this.y = y;
-		this.rotation = rotation;
-		this.player = player;
-	}
-	//Creates Ship
-	public Ship(String color, int x, int y, int rotation, int player)
-	{
-		this.color = color;
-		this.colorNum = getColorNum(color);
-		try {
-		this.ship = ImageIO.read(new File(getColor()+" Ship.png"));
-		} catch (IOException e) {}
-		this.x = x;
-		this.y = y;
-		this.rotation = rotation;
-		this.player = player;
-	}
-	//Creates Ship
-	public Ship(int colorNum,double scale, int x, int y, int rotation, int player)
-	{
-		this.color = getColor(colorNum);
-		this.colorNum = colorNum;
-		try {
-			this.ship = ImageIO.read(new File(getColor()+" Ship.png"));
-			} catch (IOException e) {}
-		this.scale = scale;
-		this.x = x;
-		this.y = y;
-		this.rotation = rotation;
-		this.player = player;
-	}
-	//Creates Ship
-	public Ship(String color,double scale, int x, int y, int rotation, int player)
-	{
-		this.color = color;
-		this.colorNum = getColorNum(color);
-		try {
-		this.ship = ImageIO.read(new File(getColor()+" Ship.png"));
-		} catch (IOException e) {}
-		this.scale = scale;
-		this.x = x;
-		this.y = y;
-		this.rotation = rotation;
-		this.player = player;
 	}
 	public String getColor() {
 		return color;
@@ -224,11 +170,11 @@ public class Ship {
 	{
 		this.scale = scale;
 	}
-	public int getPlayer() {
-		return player;
+	public Boolean getMovingRight() {
+		return MovingRight;
 	}
-	public void setPlayer(int player) {
-		this.player = player;
+	public void setMovingRight(Boolean movingRight) {
+		MovingRight = movingRight;
 	}
 	public String getCoordinates()
 	{

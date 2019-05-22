@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,21 +13,22 @@ import types.Button;
 
 public class AheadInput{
 	
+	//Helps make drawing the Background quicker
 	GraphicsAid GA = new GraphicsAid();
 	MouseListener ML;
 	Button B[] = new Button[9];
 	
 	int mouseX, mouseY, turns; 
 	
-	int width = Main.getWidth();
-	int height = Main.getHeight();
+	int width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	int height = 480;
 	int scale = 55;
 	
 	public AheadInput()
 	{
 		//creates buttons 1-5 and puts
 		//them in their proper place.
-		int posX = (int)((width/2)-(7*scale));
+		int posX = (int)((width/2)-(7.5*scale));
 		int posY = -25;
 		for (int i=0;i<5;i++)
 		{
@@ -91,7 +93,7 @@ public class AheadInput{
 			}
 			//draws String to the Screen.
 			g.setFont(new Font("courier",1,50));
-			g.drawString("Select how many turns you decide for at a time.", width/9, height/3);
+			g.drawString("Select how many turns you decide for at a time.", (int) ((width / 2)-(scale*13)), (int) (height*4/5));
 		}	
 
 	}

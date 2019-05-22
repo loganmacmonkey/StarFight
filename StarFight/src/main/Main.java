@@ -38,22 +38,23 @@ public class Main {
 	public Main()
 	{
 		//stores the Height & Width of the Screen.
-		int SWidth = (int) getWidth();
-		int SHeight = (int) getHeight(); 
+		int SWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int SHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		
 		//Creates the Screen Dimensions
-		Dimension FSize = new Dimension(SWidth, SWidth / 4);
+		Dimension FSize = new Dimension(SWidth, 480);
 		
 		//Frame setup
 		f = new JFrame("StarFight!");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(FSize);
-		f.setResizable(false);
+		f.setResizable(true);
 		f.setLocation(0,(int)(SHeight / 2.0 - (SWidth / 8.0)));
 		
 		//Adds Main Panel to the Frame
 		f.add(p);
 		p.setLayout(CL);
+		p.setFocusable(true);
 		
 		//Launches Panel which asks for how many turns you'd like
 		//to decide at a time and puts it on the JPanel.
@@ -83,24 +84,10 @@ public class Main {
 		CL.show(p, "3");
 	}
 	
-	public static JFrame getFrame()
-	{return f;}
-	
 	public static JPanel getJPanel()
 	{return p;}
 	
 	public static CardLayout getCardLayout()
 	{return CL;}
-	
-	public static int getTurns()
-	{return TA;}
-	
-	//returns Screen Height
-	public static int getHeight()
-	{return (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();}
-	
-	//returns Screen Width
-	public static int getWidth()
-	{return (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();}
 	
 }

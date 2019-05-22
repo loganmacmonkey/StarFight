@@ -13,6 +13,7 @@ import types.Ship;
 
 public class ShipSelect {
 
+	//Helps make drawing the Background quicker
 	GraphicsAid GA = new GraphicsAid();
 	MouseListener ML;
 	Button B[] = new Button[7];
@@ -20,15 +21,15 @@ public class ShipSelect {
 	
 	int mouseX, mouseY, turns, ST, P1, P2; 
 	
-	int width = Main.getWidth();
-	int height = Main.getHeight();
+	int width = Main.getJPanel().getWidth();
+	int height = Main.getJPanel().getHeight();
 	int scale = 55;
 
 	public ShipSelect() {
 		
 		//creates buttons 1-3 & Ships 1-3
 		//& puts them in their proper place.
-		int posX = (int)((width/2)-(4*scale));
+		int posX = (int)((width/2)-(3*scale));
 		int posY = -25;
 		for (int i=0;i<3;i++)
 		{
@@ -39,7 +40,7 @@ public class ShipSelect {
 		
 		//creates buttons 4-7 & Ships 4-7
 		//& puts them in their proper place.
-		posX = (int)((width/2)-(5.5*scale));
+		posX = (int)((width/2)-(4.5*scale));
 		posY += scale*3;
 		for (int i=3;i<7;i++)
 		{
@@ -148,7 +149,7 @@ public class ShipSelect {
 			
 			//Draws the String to the Screen.
 			g.setFont(new Font("courier",1,50));
-			g.drawString("Player 1, select your ship.", (int)(width/4), height/3);
+			g.drawString("Player 1, select your ship.", (int) ((width / 2)-(scale*7)), (int) (height*4/5));
 			
 			//Update the screen
 			repaint();
@@ -219,7 +220,7 @@ public class ShipSelect {
 			//since switching to this Panel.
 			g.setFont(new Font("courier",1,50));
 			if (((double)System.currentTimeMillis() - TimeS)>1000) {
-				g.drawString("Player 2, select your ship.", (int) (width / 4), height / 3);
+				g.drawString("Player 2, select your ship.", (int) ((width / 2)-(scale*7)), (int) (height*4/5));
 			}
 			
 			//Update the screen
