@@ -8,8 +8,8 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JComponent;
 
+import game.Game;
 import main.Main;
-import topGame.TopOfGame;
 import types.Button;
 
 public class SelectingBottom {
@@ -22,6 +22,16 @@ public class SelectingBottom {
 	int TurnIndex = 0;
 	
 	String SF;
+	
+	public String[] getP1Moves()
+	{
+		return P1Moves;
+	}
+	
+	public String[] getP2Moves()
+	{
+		return P2Moves;
+	}
 	
 	public void setup(int Turns)
 	{
@@ -63,8 +73,9 @@ public class SelectingBottom {
 								if (SF == "P1") {
 									SF = "P2";
 									TurnIndex = 0;
-								} else {
-									TopOfGame.process(P1Moves, P2Moves);
+								} else if (SF == "P2"){
+									Game.setMode("Processing");
+									SF = "None";
 								} 
 							}
 						}
@@ -173,7 +184,7 @@ public class SelectingBottom {
 			});
 
 	}
-	
+
 	public void paintSelectingBottom(Graphics g, JComponent J)
 	{
 		for(Button O : options)

@@ -127,7 +127,7 @@ public class Ship {
 		setShip();
 	}
 	public int getXInt() {
-		return (int)Math.floor(this.x);
+		return (int)x;
 	}
 	public double getX() {
 		return x;
@@ -139,7 +139,7 @@ public class Ship {
 		this.x = x;
 	}
 	public int getYInt() {
-		return (int)Math.floor(this.y);
+		return (int)y;
 	}
 	public double getY() {
 		return y;
@@ -151,16 +151,32 @@ public class Ship {
 		this.y = y;
 	}
 	public int getRotationInt() {
-		return (int) rotation;
+		return (int)rotation;
 	}
 	public double getRotation() {
 		return rotation;
 	}
 	public void setRotation(int rotation) {
+		if(rotation < 0)
+		{
+			rotation = rotation % 360;
+			this.rotation = rotation + 360.00;
+		}
+		else
+		{
 		this.rotation = rotation % 360;
+		}
 	}
 	public void setRotation(double rotation) {
+		if(rotation < 0)
+		{
+			rotation = rotation % 360.00;
+			this.rotation = rotation + 360.00;
+		}
+		else
+		{
 		this.rotation = rotation % 360.00;
+		}
 	}
 	public double getScale()
 	{
