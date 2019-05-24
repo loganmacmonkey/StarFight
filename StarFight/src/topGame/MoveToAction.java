@@ -156,7 +156,6 @@ public class MoveToAction {
 	
 	public String[] Shoot(Ship S)
 	{
-		int Y = SC.getYSpace(S);
 		int R = S.getRotationInt();
 		Boolean MR = S.getMovingRight();
 		
@@ -166,8 +165,6 @@ public class MoveToAction {
 		}
 		else if(MR)
 		{
-			if(Y==1)
-			{
 				if (R==0)
 				{
 					return new String[] {"RR","S"};
@@ -176,23 +173,9 @@ public class MoveToAction {
 				{
 					return new String[] {"RL","S"};
 				}
-			}
-			else
-			{
-				if (R==0)
-				{
-					return new String[] {"RL","S"};
-				}
-				else
-				{
-					return new String[] {"RR","S"};
-				}
-			}
 		}
 		else
 		{
-			if(Y==1)
-			{
 				if (R==0)
 				{
 					return new String[] {"RL","S"};
@@ -201,18 +184,6 @@ public class MoveToAction {
 				{
 					return new String[] {"RR","S"};
 				}
-			}
-			else
-			{
-				if (R==0)
-				{
-					return new String[] {"RR","S"};
-				}
-				else
-				{
-					return new String[] {"RL","S"};
-				}
-			}
 		}
 	}
 	

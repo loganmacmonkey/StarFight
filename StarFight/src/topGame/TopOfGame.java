@@ -84,9 +84,6 @@ public class TopOfGame {
 			for (Laser L : Lasers) {
 				L.drawLaser(g, J);
 			}
-		} else if (mode == "Processing")
-		{
-			
 		}
 	}
 	

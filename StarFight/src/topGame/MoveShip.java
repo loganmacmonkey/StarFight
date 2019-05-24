@@ -37,9 +37,9 @@ public class MoveShip {
 			for(Laser l : L)
 			{
 				if (l.getRotationInt()==90) {
-					l.setX(SC.getX(SC.getXSpace(l) + 2));
+					l.setX(l.getX() + SC.getSpaceX());
 				} else {
-					l.setX(SC.getX(SC.getXSpace(l) - 2));
+					l.setX(l.getX() - SC.getSpaceX());
 				}
 				if (SC.getXSpace(l) < 0 || SC.getXSpace(l) > 17)
 				{
@@ -47,16 +47,16 @@ public class MoveShip {
 				}
 			}
 			P1 = Action(P1,A1[i],1000);
-			P2 = Action(P1,A2[i],1000);
+			P2 = Action(P2,A2[i],1000);
 		}
 		
 		int t = time%1000;
 		for(Laser l : L)
 		{
 			if (l.getRotationInt()==90) {
-				l.setX(l.getX()+((SC.getX(SC.getXSpace(l)+1)-(l.getX()))*t/500));
+				l.setX(l.getX()+((SC.getSpaceX())*t/1000));
 			} else {
-				l.setX(l.getX()-(((l.getX())-SC.getX(SC.getXSpace(l)-1))*t/500));
+				l.setX(l.getX()-((SC.getSpaceX())*t/1000));
 			}
 			if (SC.getXSpace(l) < 0 || SC.getXSpace(l) > 17)
 			{
@@ -153,19 +153,19 @@ public class MoveShip {
 			{
 				if(S.getRotationInt() == 90)
 				{
-					S.setX(S.getX()+(SC.getSpaceX()*7*time/4000));
+					S.setX(S.getX()+(SC.getSpaceX()*5*time/4000));
 				}
 				else if (S.getRotationInt() == 270)
 				{
-					S.setX(S.getX()-(SC.getSpaceX()*7*time/4000));
+					S.setX(S.getX()-(SC.getSpaceX()*5*time/4000));
 				}
 				else if (S.getRotationInt() == 0)
 				{
-					S.setY(SC.getY(2)+(SC.getSpaceY()*7*time/4000));
+					S.setY(SC.getY(2)+(SC.getSpaceY()*5*time/4000));
 				}
 				else if (S.getRotationInt() == 180)
 				{
-					S.setY(SC.getY(1)-(SC.getSpaceY()*7*time/4000));
+					S.setY(SC.getY(1)-(SC.getSpaceY()*5*time/4000));
 				}
 				break;
 			}
@@ -197,11 +197,11 @@ public class MoveShip {
 				{
 					if (S.getRotationInt() == 90) 
 					{
-						Lasers.add(new Laser(S.getColor(), S.getScale(), SC.getX(SC.getXSpace(S) + 1), S.getYInt(), 90));
+						Lasers.add(new Laser(S.getColor(), S.getScale(), S.getXInt() + SC.getSpaceX(), S.getYInt(), 90));
 					}
 					else
 					{
-						Lasers.add(new Laser(S.getColor(), S.getScale(), SC.getX(SC.getXSpace(S) - 1), S.getYInt(), 270));
+						Lasers.add(new Laser(S.getColor(), S.getScale(), S.getXInt() - SC.getSpaceX(), S.getYInt(), 270));
 					}
 				}break;
 			}

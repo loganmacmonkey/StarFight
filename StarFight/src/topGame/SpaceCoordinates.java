@@ -18,12 +18,12 @@ public class SpaceCoordinates {
 	
 	public int getXSpace(Ship X)
 	{
-		return ((((32*X.getXInt())/Main.getJPanel().getWidth())+1)/2);
+		return ((((32*(X.getXInt()+1))/Main.getJPanel().getWidth())+1)/2);
 	}
 	
 	public int getXSpace(Laser X)
 	{
-		return ((((32*X.getXInt())/Main.getJPanel().getWidth())+1)/2);
+		return ((((32*(X.getXInt()+1))/Main.getJPanel().getWidth())+1)/2);
 	}
 	
 	public int getSpaceY()

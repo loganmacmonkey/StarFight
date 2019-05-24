@@ -13,7 +13,6 @@ public class PlayTop {
 	public Ship getP1(Ship P1, String[] P1A)
 	{
 		int Time = Game.getTime();
-		System.out.println(Time);
 		return MA.Move(P1, P1A, Time);
 	}
 	
