@@ -9,6 +9,8 @@ import java.awt.RenderingHints;
 
 import javax.swing.JComponent;
 
+//holds everything about a Button's functionality
+//& the ability to create them.
 public class Button{
 	
 	private int x;	
@@ -54,6 +56,7 @@ public class Button{
 	public String getDisplay() {
 		return display;
 	}
+	//sets the texts which to be displayed to the button (only works for single characters).
 	public void setDisplay(String display) {
 		this.display = display;
 	}

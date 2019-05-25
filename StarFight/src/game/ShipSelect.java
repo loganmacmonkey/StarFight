@@ -11,18 +11,34 @@ import main.Main;
 import types.Button;
 import types.Ship;
 
+//chooses P1 & P1's ship for the game.
 public class ShipSelect {
 
 	//Helps make drawing the Background quicker
 	GraphicsAid GA = new GraphicsAid();
+	
+	//Listens for mouse clicks.
 	MouseListener ML;
+	
+	//Creates the 7 buttons that appear on the screen.
 	Button B[] = new Button[7];
+	
+	//create the 7 colored ships that appear in each button.
 	Ship S[] = new Ship[7];
 	
+	//Stores the X & Y of the mouse (MouseX & MouseY),
+	//how many turns you'd like to decide at a time (turns),
+	//current clock (System) time in milliseconds (ST) &
+	//the ship you choose corresponding to the button pressed.
 	int mouseX, mouseY, turns, ST, P1, P2; 
 	
+	//gets the Width of the Window (Frame/Panel).
 	int width = Main.getJPanel().getWidth();
+	
+	//gets the Height of the Window (Frame/Panel).
 	int height = Main.getJPanel().getHeight();
+	
+	//An arbitrary size for all the buttons to make them fit nice.
 	int scale = 55;
 
 	public ShipSelect() {
@@ -117,7 +133,8 @@ public class ShipSelect {
 		//Add Graphics to the Main Panel.
 		Main.getJPanel().add(PSS1,"2a");
 		Main.getJPanel().add(PSS2,"2b");
-		//gets the current run time in Milliseconds (1000 = 1sec)
+		
+		//gets the current calendar time in Milliseconds (1000 = 1sec)
 		ST = (int)System.currentTimeMillis();
 	}
 	

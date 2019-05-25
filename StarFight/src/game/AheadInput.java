@@ -11,13 +11,20 @@ import game.GraphicsAid;
 import main.Main;
 import types.Button;
 
+//Chooses how many turns you'd like to decide at a time.
 public class AheadInput{
 	
 	//Helps make drawing the Background quicker
 	GraphicsAid GA = new GraphicsAid();
+	
+	//Listens for mouse clicks.
 	MouseListener ML;
+	
+	//Creates the 9 nine buttons that appear on the screen.
 	Button B[] = new Button[9];
 	
+	//stores the X & Y of the mouse (mouseX & mouseY) &
+	//how many turns you'd like to decide at a time (turns).
 	int mouseX, mouseY, turns; 
 	
 	int width = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
@@ -60,6 +67,8 @@ public class AheadInput{
 				{
 					if(B[i].collisionCheck(e.getX(),e.getY()))
 					{
+						//Send how many Turns the game have the player
+						//decide at a time and run ShipSelect.
 						Main.proceed1(i+1);
 					}
 				}
@@ -84,8 +93,10 @@ public class AheadInput{
 		public void paint(Graphics g)
 		{
 			super.paintComponent(g);
+			
 			//Draws the dark Blue Background to the Screen.
 			GA.drawBackground(g, this);
+			
 			//Draws all the Buttons to the Screen.
 			for (Button b : B)
 			{

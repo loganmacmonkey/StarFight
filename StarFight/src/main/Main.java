@@ -53,6 +53,8 @@ public class Main {
 		
 		//Adds Main Panel to the Frame
 		f.add(p);
+		
+		//Sets the Layout to a CardLayout created up top.
 		p.setLayout(CL);
 		p.setFocusable(true);
 		

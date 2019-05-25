@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 
 import javax.swing.JComponent;
 
+//Draws a few line-consuming things to the Screen.
 public class GraphicsAid{
 
 	//Draws the dark Blue Background.

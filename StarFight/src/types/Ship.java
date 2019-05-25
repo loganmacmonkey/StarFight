@@ -10,15 +10,32 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+//holds everything about a Ships functionality
+//& the ability to create them.
 public class Ship {
 	
+	//Stores the color of the Ship (Black & White by default).
 	private String color = "B&W";
+	
+	//Stores whether the Ship is moving to the right or not moving to the right.
 	private Boolean MovingRight;
+	
+	//Stores a Number which is equal to the color of the Ship (0 = Black & White).
 	private int colorNum = 0;
+	
+	//Stores the image for the Ship.
 	private BufferedImage ship;
+	
+	//Stores the X & Y values of the Ship on the screen.
 	private double x = 0;
 	private double y = 0;
+	
+	//Stores the rotation of the Ship (0 = up, 90 = right, 180 = down & 270 = left).
 	private double rotation = 0.00;
+	
+	//Stores the amount to scale up each pixel of the image by
+	//(if scale = 20, each individual image pixel of the Ship
+	//on the screen will take up 20*20 or 400 pixels).
 	private double scale = 20.0;
 	
 	//Creates Ship
@@ -156,6 +173,8 @@ public class Ship {
 	public double getRotation() {
 		return rotation;
 	}
+	//sets the rotation to a number between 0 to 359 that
+	//is equal to the input (Integer Input).
 	public void setRotation(int rotation) {
 		if(rotation < 0)
 		{
@@ -167,6 +186,8 @@ public class Ship {
 		this.rotation = rotation % 360;
 		}
 	}
+	//sets the rotation to a number between 0 to 359 that
+	//is equal to the input (Double Input).
 	public void setRotation(double rotation) {
 		if(rotation < 0)
 		{

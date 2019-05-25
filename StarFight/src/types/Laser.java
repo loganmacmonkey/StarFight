@@ -10,15 +10,30 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+//holds everything about a Laser's functionality
+//& the ability to create them.
 public class Laser {
 	
+	//Stores the color of the Laser (Black & White by default).
 	private String color = "B&W";
+	
+	//Stores a Number which is equal to the color of the Laser (0 = Black & White).
 	private int colorNum = 0;
+	
+	//Stores the image for the Laser.
 	private BufferedImage laser;
+	
+	//Stores the X & Y values of the Laser on the screen.
 	private double x = 0;
 	private double y = 0;
-	private double scale = 20.0;
+	
+	//Stores the rotation of the Laser (0 = up, 90 = right, 180 = down & 270 = left).
 	private double rotation = 0.00;
+	
+	//Stores the amount to scale up each pixel of the image by
+	//(if scale = 20, each individual image pixel of the Laser
+	//on the screen will take up 20*20 or 400 pixels).
+	private double scale = 20.0;
 	
 	//Creates Laser
 	public Laser(String color, int x, int y)
