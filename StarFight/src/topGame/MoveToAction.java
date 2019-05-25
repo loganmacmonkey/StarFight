@@ -157,7 +157,7 @@ public class MoveToAction {
 			}
 		}
 	}
-	
+	//Returns the actions for the Ship to shoot.
 	public String[] Shoot(Ship S)
 	{
 		//Gathers all the information on the Ship necessary
