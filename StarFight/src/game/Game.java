@@ -9,6 +9,7 @@ import bottomGame.BottomOfGame;
 import main.Main;
 import topGame.SpaceCoordinates;
 import topGame.TopOfGame;
+import types.Laser;
 import types.Ship;
 
 //Takes in how many turns you'd like to decide at a time &
@@ -30,6 +31,10 @@ public class Game {
 	//Controls the bottom of the screen.
 	static BottomOfGame BOG;
 	
+	//Stores the Ships for the BottomOfGame Class to use for Color.
+	static Ship P1;
+	static Ship P2;
+	
 	//Helps make drawing the Background quicker
 	GraphicsAid GA = new GraphicsAid();
 	
@@ -38,6 +43,9 @@ public class Game {
 	
 	public Game (int Turns, Ship P1, Ship P2)
 	{	
+		//Stores the selected ships into the class.
+		Game.P1 = P1;
+		Game.P2 = P2;
 		
 		//Takes P1 & 2's selected ships and modifies
 		//them to be ready for the game.
@@ -80,6 +88,7 @@ public class Game {
 	{
 		public void paint(Graphics g)
 		{
+			if (mode != "Finished") {
 			//If moves are selected, start creating the actions
 			//necessary to move the ship.
 			if(mode == "Processing")
@@ -98,9 +107,20 @@ public class Game {
 			//draws everything for the Bottom of the Screen
 			BOG.paintBottomOfScreen(g, this);
 			
-			//keeps the paint function always updating.
-			repaint();
+				//keeps the paint function always updating.
+				repaint();
+			}
 		}
+	}
+	
+	public static Ship getP1()
+	{
+		return P1;
+	}
+	
+	public static Ship getP2()
+	{
+		return P2;
 	}
 
 	//grabs the P1 moves you selected in the Bottom of the

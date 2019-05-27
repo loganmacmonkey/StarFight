@@ -106,18 +106,89 @@ public class SelectingBottom {
 								//let the top screen start processing them.
 								} else if (SF == "P2"){
 									Game.setMode("Processing");
+									Main.getJPanel().removeKeyListener(this);
 									SF = "None";
 								} 
 							}
 						}
-					}
+						else if(e.getKeyCode() == KeyEvent.VK_F)
+						{
+							if(TurnIndex<Turns)
+							{
+								if(SF=="P1")
+								{
+									P1Moves[TurnIndex] = "F";
+								}
+								else
+								{
+									P2Moves[TurnIndex] = "F";
+								}
+								TurnIndex++;
+							}
+						}
+						else if(e.getKeyCode() == KeyEvent.VK_S)
+						{
+							if(TurnIndex<Turns)
+							{
+								if(SF=="P1")
+								{
+									P1Moves[TurnIndex] = "S";
+								}
+								else
+								{
+									P2Moves[TurnIndex] = "S";
+								}
+								TurnIndex++;
+							}
+						}
+						else if(e.getKeyCode() == KeyEvent.VK_V)
+						{
+							if(TurnIndex<Turns)
+							{
+								if(SF=="P1")
+								{
+									P1Moves[TurnIndex] = "V";
+								}
+								else
+								{
+									P2Moves[TurnIndex] = "V";
+								}
+								TurnIndex++;
+							}
+						}
+						else if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+						{
+							if(TurnIndex>0)
+							{
+								if(SF=="P1")
+							{
+								P1Moves[TurnIndex-1] = "";
+							}
+							else
+							{
+								P2Moves[TurnIndex-1] = "";
+							}
+							TurnIndex--;
+							}
+						}else if (e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_C)
+						{
+							if(SF=="P1")
+							{
+								P1Moves = new String[Turns];
+							}
+							else
+							{
+								P2Moves = new String[Turns];
+							}
+							TurnIndex=0;
+							}
+						}
 
 					@Override
 					public void keyReleased(KeyEvent arg0) {}
 
 					@Override
 					public void keyTyped(KeyEvent arg0) {}
-			
 				});
 		
 		//Checks for which buttons you've clicked to know what moves you want
@@ -234,11 +305,6 @@ public class SelectingBottom {
 	//Paints the screen.
 	public void paintSelectingBottom(Graphics g, JComponent J)
 	{
-		//Draws all the bigger buttons to Screen
-		for(Button O : options)
-		{
-			O.drawButton(g, J);
-		}
 		//If Searching for P1 moves...
 		if (SF == "P1")
 		{
@@ -253,7 +319,15 @@ public class SelectingBottom {
 	}	
 	//Draws P1's moves to the screen
 	public void paintSelectingP1Bottom(Graphics g, JComponent J)
-	{
+	{	
+		//Draws all the bigger buttons to Screen
+		for(Button O : options)
+		{
+			O.drawButton(g, J,game.Game.getP1().getJavaColor());
+		}
+		//Sets the color of the text to the same as P1's ship.
+		g.setColor(game.Game.getP1().getJavaColor());
+		
 		//Draw to screen P1 in the bottom left.
 		g.drawString("P1", options[0].getX()/3, 400);
 		
@@ -284,12 +358,20 @@ public class SelectingBottom {
 				Moves[i].setDisplay(P1Moves[i]);
 			}
 			//Draw each button.
-			Moves[i].drawButton(g, J);
+			Moves[i].drawButton(g, J, game.Game.getP1().getJavaColor());
 		}
 	}
 	//Draws P1's moves to the screen
 	public void paintSelectingP2Bottom(Graphics g, JComponent J)
-	{
+	{	
+		//Draws all the bigger buttons to Screen
+		for(Button O : options)
+		{
+			O.drawButton(g, J, game.Game.getP2().getJavaColor());
+		}
+		//Sets the color of everything being drawn.
+		g.setColor(game.Game.getP2().getJavaColor());
+		
 		//Draw to screen P2 in the bottom left.
 		g.drawString("P2", options[0].getX()/3, 400);
 		
@@ -319,7 +401,7 @@ public class SelectingBottom {
 				Moves[i].setDisplay(P2Moves[i]);
 			}
 			//Draw each button.
-			Moves[i].drawButton(g, J);
+			Moves[i].drawButton(g, J, game.Game.getP2().getJavaColor());
 			
 		}
 	}

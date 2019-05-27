@@ -72,6 +72,19 @@ public class Button{
 		g2d.drawString(display, (int) (getX() - (scale * 0.5)), (int) (getY() + (scale * 2.625)));
 	}
 	
+	public void drawButton(Graphics g, JComponent F, Color C)
+	{
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setRenderingHints(new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
+		g2d.setColor(new Color(255, 255, 255));
+		g2d.setStroke(new BasicStroke(5));
+		g2d.setColor(C);
+		g2d.drawRect(getX() - scale, getY() + scale, 2 * scale, 2 * scale);
+		g2d.setFont(new Font("courier", 1, scale * 2));
+		g2d.setColor(Color.WHITE);
+		g2d.drawString(display, (int) (getX() - (scale * 0.5)), (int) (getY() + (scale * 2.625)));
+	}
+	
 	//Checks if a set of coordinates are contained
 	//within your button.
 	public boolean collisionCheck(int x,int y)

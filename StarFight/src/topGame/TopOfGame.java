@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 
 import game.Game;
+import main.Main;
 import types.*;
 
 //Takes in all the input from the BottomOfGame class &
@@ -35,29 +36,14 @@ public class TopOfGame {
 	public PlayTop getPlayTop()
 	{return PT;}
 	
-	//Returns a clone of P1's ship.
-	private Ship getP1()
-	{
-		Ship a = new Ship(P1.getColorNum(), P1.getScale(), P1.getXInt(), P1.getYInt(), P1.getRotationInt());
-		a.setMovingRight(P1.getMovingRight());
-		return a;
-	}
-	
-	//Returns a clone of P2's ship.
-	private Ship getP2()
-	{
-		Ship a = new Ship(P2.getColorNum(), P2.getScale(), P2.getXInt(), P2.getYInt(), P2.getRotationInt());
-		a.setMovingRight(P2.getMovingRight());
-		return a;
-	}
-	
 	//Returns a clone of the list of Lasers
 	private ArrayList<Laser> getLasers()
 	{
 		ArrayList<Laser> a = new ArrayList<Laser>();
 		for(Laser l : Lasers)
 		{
-			a.add(l);
+			Laser L = new Laser(l.getColorNum(), l.getScale(), l.getXInt(), l.getYInt(), l.getRotationInt());
+			a.add(L);
 		}
 		return a;
 	}
@@ -74,8 +60,12 @@ public class TopOfGame {
 
 	//Creates everything to get it ready for Play mode.
 	public void process(String[]P1Moves, String[]P2Moves) {
-		P1Actions = CA.CA(getP1(),P1Moves);
-		P2Actions = CA.CA(getP2(),P2Moves);
+		String[] P1A = CA.CA(P1.clone(),P1Moves);
+		String[] P2A = CA.CA(P2.clone(),P2Moves);
+		P1Actions = CA.CAwithBurning(P1.clone(), P2.clone(), P1A.clone(), P2A.clone(), getLasers());
+		P2Actions = CA.CAwithBurning(P2.clone(), P1.clone(), P2A.clone(), P1A.clone(), getLasers());
+		P1Actions = CA.CAwithBurning(P1.clone(), P2.clone(), P1A.clone(), P2Actions.clone(), getLasers());
+		P2Actions = CA.CAwithBurning(P2.clone(), P1.clone(), P2A.clone(), P1Actions.clone(), getLasers());
 		Game.setMode("Play");
 	}
 	
@@ -85,14 +75,16 @@ public class TopOfGame {
 		if(mode == "Play")
 		{
 			//Draw the Ships at the point in time specified from the actions given.
-			PT.getMovedShip(getP1(),P1Actions).drawShip(g,J);
-			PT.getMovedShip(getP2(),P2Actions).drawShip(g,J);
+			PT.getMovedShip(P1.clone(),P1Actions).drawShip(g,J);
+			PT.getMovedShip(P2.clone(),P2Actions).drawShip(g,J);
 			
 			//Draw all the Lasers from both ships in the point
 			//in time specified from the actions given
-			for(Laser l : PT.getLasers(getP1(),getP2(),P1Actions,P2Actions,getLasers()))
+			for(Laser L : PT.getLasers(P1.clone(),P2.clone(),P1Actions,P2Actions,getLasers()))
 			{
-				l.drawLaser(g, J);
+				L.drawLaser(g, J);
+				//System.out.println(PT.getMovedShip(getP2(),P2Actions).getXInt() - L.getXInt());
+				//System.out.println(PT.getMovedShip(getP2(),P2Actions).ContainsPoint(L.getXInt(), L.getYInt()));
 			}
 		}
 		//If in selecting mode, draw the ships in the
@@ -103,6 +95,41 @@ public class TopOfGame {
 			P2.drawShip(g, J);
 			for (Laser L : Lasers) {
 				L.drawLaser(g, J);
+			}
+		}
+		else if (mode == "Pre-Selecting")
+		{
+			ArrayList<Laser> LaserPlaceholder = new ArrayList<Laser>();
+			for (Laser L : Lasers)
+			{
+				LaserPlaceholder.add(L);
+			}
+			Lasers.clear();
+			for (Laser L : PT.getLasers(P1.clone(),P2.clone(),P1Actions,P2Actions,LaserPlaceholder))
+			{
+				Lasers.add(L);
+			}
+			P1 = PT.getMovedShip(P1.clone(),P1Actions);
+			P2 = PT.getMovedShip(P2.clone(),P2Actions);
+			if(P1.getBurnedAmount()>0 ||  P2.getBurnedAmount()>0)
+			{
+				if (P1.getBurnedAmount()>P2.getBurnedAmount())
+				{
+					Main.proceed3(P2, P1, "P2");
+				} 
+				else if (P2.getBurnedAmount()>P1.getBurnedAmount())
+				{
+					Main.proceed3(P1, P2, "P1");
+				}
+				else
+				{
+					Main.proceed3(P1, P2);
+				}
+				Game.setMode("Finished");
+			}
+			else
+			{
+				mode = "Selecting";
 			}
 		}
 	}

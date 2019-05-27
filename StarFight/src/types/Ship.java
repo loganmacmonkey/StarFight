@@ -1,5 +1,6 @@
 package types;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -22,6 +23,9 @@ public class Ship {
 	
 	//Stores a Number which is equal to the color of the Ship (0 = Black & White).
 	private int colorNum = 0;
+	
+	//Stores the amount of time the ship has been burning for.
+	private int BurnedAmount = 0;
 	
 	//Stores the image for the Ship.
 	private BufferedImage ship;
@@ -110,6 +114,29 @@ public class Ship {
 		this.y = y;
 		this.rotation = rotation;
 	}
+	public Color getJavaColor()
+	{
+		if (colorNum == 0){
+			return Color.BLACK;
+		}else if (colorNum == 1){
+			return Color.RED;
+		}else if (colorNum == 2) {
+			return Color.GREEN;
+		}else if (colorNum == 3) {
+			return Color.BLUE;
+		}else if (colorNum == 4) {
+			return new Color(148,0,211);
+		}else if (colorNum == 5) {
+			return Color.ORANGE;
+		}else if (colorNum == 6) {
+			return Color.YELLOW;
+		}else if (colorNum == 7) {
+			return Color.CYAN;
+		}else {
+			return Color.BLACK;
+		}
+	}
+	
 	public String getColor() {
 		return color;
 	}
@@ -213,6 +240,14 @@ public class Ship {
 	public void setMovingRight(Boolean movingRight) {
 		MovingRight = movingRight;
 	}
+	public int getBurnedAmount()
+	{
+		return BurnedAmount;
+	}
+	public void setBurnedAmount(int BurnedAmount)
+	{
+		this.BurnedAmount = BurnedAmount;
+	}
 	public String getCoordinates()
 	{
 		return "(" + this.x + "," + this.y + ")";
@@ -285,6 +320,13 @@ public class Ship {
 			} catch (IOException e) {}
 	}
 	
+	public Ship clone()
+	{
+		Ship a = new Ship(this.getColorNum(), this.getScale(), this.getXInt(), this.getYInt(), this.getRotationInt());
+		a.setMovingRight(this.getMovingRight());
+		return a;
+	}
+	
 	//moves the ship a pixel forward in the
 	//direction it's rotated in (facing).
 	public void forward()
@@ -315,13 +357,35 @@ public class Ship {
 		double Width = scale * getShip().getWidth();
 		double Height = scale * getShip().getHeight();
 		
-		AffineTransform at = AffineTransform.getTranslateInstance(getX()-Width/2, getY()-Height/2);
-		at.rotate(Math.toRadians(getRotation()), Width / 2, Height / 2);
-		at.scale(scale, scale);
+		AffineTransform atS = AffineTransform.getTranslateInstance(getX()-Width/2, getY()-Height/2);
+		atS.rotate(Math.toRadians(getRotation()), Width / 2, Height / 2);
+		atS.scale(scale, scale);
 		
 		Graphics2D g2d = (Graphics2D) g;
 		
-		g2d.drawImage(getShip(),at,F);
+		g2d.drawImage(getShip(),atS,F);
+		
+		if(getBurnedAmount() > 0)
+		{
+			AffineTransform atF = AffineTransform.getTranslateInstance(getX()-Width/2, getY()-Height/2);
+			atF.rotate(getBurnedAmount(), Width / 2, Height / 2);
+			atF.scale(scale, scale);
+			
+			try {
+					if(getBurnedAmount()%40 <= 13)
+					{
+						g2d.drawImage(ImageIO.read(new File("Fire1.png")),atF,F);
+					}
+					else if (getBurnedAmount()%40 <= 26)
+					{
+						g2d.drawImage(ImageIO.read(new File("Fire2.png")),atF,F);
+					}
+					else if (getBurnedAmount()%40 <= 39)
+					{
+						g2d.drawImage(ImageIO.read(new File("Fire3.png")),atF,F);
+					}
+				} catch (IOException e) {}
+		}
 	}
 	
 	//Draws the Ship any size of JComponent of your choosing.
@@ -330,13 +394,35 @@ public class Ship {
 		double Width = Scale * getShip().getWidth();
 		double Height = Scale * getShip().getHeight();
 		
-		AffineTransform at = AffineTransform.getTranslateInstance(getX()-Width/2, getY()-Height/2);
-		at.rotate(Math.toRadians(getRotation()), Width / 2, Height / 2);
-		at.scale(Scale, Scale);
+		AffineTransform atS = AffineTransform.getTranslateInstance(getX()-Width/2, getY()-Height/2);
+		atS.rotate(Math.toRadians(getRotation()), Width / 2, Height / 2);
+		atS.scale(Scale, Scale);
 		
 		Graphics2D g2d = (Graphics2D) g;
 		
-		g2d.drawImage(getShip(),at,F);
+		g2d.drawImage(getShip(),atS,F);
+		
+		if(getBurnedAmount() > 0)
+		{
+			AffineTransform atF = AffineTransform.getTranslateInstance(getX()-Width/2, getY()-Height/2);
+			atF.rotate(getBurnedAmount(), Width / 2, Height / 2);
+			atF.scale(Scale, Scale);
+			
+			try {
+					if(getBurnedAmount()%40 <= 13)
+					{
+						g2d.drawImage(ImageIO.read(new File("Fire1.png")),atF,F);
+					}
+					else if (getBurnedAmount()%40 <= 26)
+					{
+						g2d.drawImage(ImageIO.read(new File("Fire2.png")),atF,F);
+					}
+					else if (getBurnedAmount()%40 <= 39)
+					{
+						g2d.drawImage(ImageIO.read(new File("Fire3.png")),atF,F);
+					}
+				} catch (IOException e) {System.out.println("oof");}
+		}
 	}
 	
 	//Draws the Laser to the JComponent of your choosing
@@ -373,6 +459,13 @@ public class Ship {
 		Graphics2D g2d = (Graphics2D) g;
 		
 		g2d.drawImage(getShip(),at,F);
+	}
+	
+	public boolean ContainsPoint(int x, int y)
+	{
+		int diffx = Math.abs(this.getXInt() - x);
+		int diffy = Math.abs(this.getYInt() - y);
+		return(diffx <= 12*this.getScale() && diffy <= 12*this.getScale());
 	}
 
 }

@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JComponent;
 
+import game.Game;
 import main.Main;
 
 //Controls and sends the moment of time to display.
@@ -22,9 +23,11 @@ public class PlayBottom {
 	Color Yellow = new Color(255,196,0);
 	
 	//Tests if TimeControl is changing the time.
+	//(volatile means "Expect to be changed by other classes")
 	volatile static Boolean running;
 	
 	//Tests if PlayBottom is still running (Still in Play mode);
+	//(volatile means "Expect to be changed by other classes")
 	volatile static Boolean playing;
 	
 	//Creates the TimeControl class.
@@ -60,6 +63,8 @@ public class PlayBottom {
 					if (TC.getTimeInt() == Turns*2000)
 					{
 						playing = false;
+						Game.setMode("Pre-Selecting");
+						Main.getJPanel().removeKeyListener(this);
 					}
 				}
 				//If pressed space, set speed back to 4 again.

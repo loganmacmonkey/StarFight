@@ -86,6 +86,20 @@ public class Main {
 		CL.show(p, "3");
 	}
 	
+	public static void proceed3(Ship a, Ship b ,String W)
+	{
+		WinScreen WS = new WinScreen();
+		WS.setup(a, b, W);
+		CL.show(p, "4");
+	}
+	
+	public static void proceed3(Ship a, Ship b)
+	{
+		WinScreen WS = new WinScreen();
+		WS.setup(a, b);
+		CL.show(p, "4");
+	}
+	
 	public static JPanel getJPanel()
 	{return p;}
 	

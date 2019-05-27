@@ -9,6 +9,9 @@ public class TimeControl implements Runnable {
 		//Creates a place holder for time.
 		double time = 0;
 		
+		//Makes sure Time is set 0 to start off.
+		Time = 0;
+		
 		//Runs as long as the screen's in playing mode.
 		while (PlayBottom.getPlaying()) {
 			

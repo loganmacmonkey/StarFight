@@ -60,9 +60,16 @@ public class BottomOfGame {
 		if (mode == "Play") {
 			PB.setup(Turns);
 			mode = "P";
-		} else if (mode == "P")
+		} 
+		else if (mode == "P")
 		{
 			PB.paintPlayBottom(g, J);
+		}
+		else if (mode == "Pre-Selecting")
+		{
+			SB = new SelectingBottom();
+			PB = new PlayBottom();
+			mode = "Selecting";
 		}
 	}
 

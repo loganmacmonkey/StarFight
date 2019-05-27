@@ -2,6 +2,7 @@ package topGame;
 
 import java.util.ArrayList;
 
+import main.Main;
 import types.Laser;
 import types.Ship;
 
@@ -30,8 +31,14 @@ public class MoveShip {
 		//Corresponding to the specified time
 		//(if time = 3750, time%3750 = 750 = three quarters of an action)
 		int t = time%1000;
-		if (t != 0) {
+		if (t != 0 && A[T] != null) {
 			S = Action(S, A[T], t);
+		} 
+		else if (T+1 < A.length)
+		{
+			if (A[T+1] == "BRN") {
+				S = Action(S, A[T+1], 1);
+			}
 		}
 		
 		//return the now moved Ship.
@@ -43,7 +50,11 @@ public class MoveShip {
 	public ArrayList<Laser> Move(Ship P1, Ship P2, String[] A1, String[] A2, ArrayList<Laser> L, int time)
 	{
 		//Get all the past lasers in the list of lasers to begin with.
-		Lasers = L;
+		Lasers.clear();
+		for (Laser l : L)
+		{
+			Lasers.add(l);
+		}
 		
 		//Stores the number of Actions which are already completed (1 action = 1000 units of time).
 		int T = time/1000;
@@ -53,37 +64,43 @@ public class MoveShip {
 		{
 			//Runs through each Laser individually and
 			//moves them each forward one space.
-			for(Laser l : L)
+			for(Laser l : Lasers)
 			{
 				if (l.getRotationInt()==90) {
 					l.setX(l.getX() + SC.getSpaceX());
 				} else {
 					l.setX(l.getX() - SC.getSpaceX());
 				}
-				//Removes any Lasers off the Screen.
-				if (SC.getXSpace(l) < 0 || SC.getXSpace(l) > 17)
+				//Set any Lasers off the Screen to Black & White.
+				if (l.getXInt() < SC.getSpaceX()*-1 || l.getXInt() > Main.getJPanel().getWidth()+SC.getSpaceX())
 				{
-					Lasers.remove(l);
+					l.setColor("B&W");
 				}
 			}
-			//Runs through each Action of each ship to add the Lasers necessary.
-			P1 = Action(P1,A1[i],1000);
-			P2 = Action(P2,A2[i],1000);
+			try {
+				//Runs through each Action of each ship to add the Lasers necessary.
+				P1 = Action(P1, A1[i], 1000);
+				P2 = Action(P2, A2[i], 1000);
+			} catch (Exception e) {}
 		}
 		
 		//Draws the Laser part ways to the next space.
 		int t = time%1000;
-		for(Laser l : L)
+		for(Laser l : Lasers)
 		{
 			if (l.getRotationInt()==90) {
 				l.setX(l.getX()+((SC.getSpaceX())*t/1000));
 			} else {
 				l.setX(l.getX()-((SC.getSpaceX())*t/1000));
 			}
-			//Removes any Lasers off the Screen.
-			if (SC.getXSpace(l) < 0 || SC.getXSpace(l) > 17)
+		}
+		//Removes all Black & White Lasers.
+		for(int i = 0;i<Lasers.size();i++)
+		{
+			if (Lasers.get(i).getColor() == "B&W")
 			{
-				Lasers.remove(l);
+				Lasers.remove(i);
+				i--;
 			}
 		}
 		//Returns the now moved list of Lasers.
@@ -117,7 +134,7 @@ public class MoveShip {
 				S.setRotation(S.getRotation()-(time*90/1000));
 				S.setMovingRight(!S.getMovingRight()); break;
 			}
-			//Whatever direction the Ship is facing, move it forward 1 space.
+			//Whatever direction the Ship is facing, move it forward one space.
 			case "F":
 			{
 				if(S.getRotationInt() == 90)
@@ -138,7 +155,7 @@ public class MoveShip {
 				}break;
 			}
 			//Whatever direction the Ship is facing,
-			//Back up the Ship 1/7 of way from one lane to the other.
+			//Back up the Ship 1/7 of the way from one lane to the other.
 			case "B1":
 			{
 				if (S.getRotationInt() == 0)
@@ -151,7 +168,7 @@ public class MoveShip {
 				}break;
 			}
 			//Whatever direction the Ship is facing, 
-			//Back up the Ship the 6/7 of way left from one lane to the other.
+			//Back up the Ship the 6/7 of the way left from one lane to the other.
 			case "B2":
 			{
 				if (S.getRotationInt() == 0)
@@ -244,6 +261,15 @@ public class MoveShip {
 					}
 				}break;
 			}
+			case "BRN":
+			{
+				S.setBurnedAmount(S.getBurnedAmount() + time);
+			} break;
+			case "D":
+			{
+				S.setX(Main.getJPanel().getWidth()+SC.getSpaceX()*2);
+				S.setBurnedAmount(S.getBurnedAmount() + time);
+			} break;
 		}
 		
 		//return the ship after being moved one action or partial action.

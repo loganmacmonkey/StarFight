@@ -32,7 +32,7 @@ public class MoveToAction {
 		Boolean MR = S.getMovingRight();
 		
 		//If the Ship is at an end facing the wall, turn around & switch directions
-		if(X==31&&MR==true&&R==90) {
+		if(X==16&&MR==true&&R==90) {
 			if(Y==1) {
 				return new String[] {"RR", "RRS"};
 			}
@@ -145,7 +145,7 @@ public class MoveToAction {
 			}
 			else if(R==270)
 			{
-				return new String[] {"RR","F"};
+				return new String[] {"RL","F"};
 			}
 			else if (R==0)
 			{

@@ -21,12 +21,22 @@ public class PlayTop {
 		
 		return MA.Move(S, A, Time);
 	}
-	//Draw the P1 Ship at the point in time specified from the actions given.
+	//Creates a moved Ship for a point in time directly specified from the actions given.
+		public Ship getMovedShip(Ship S, String[] A, int Time)
+		{	
+			return MA.Move(S, A, Time);
+		}
+	//Draws the Lasers at the point in time specified from the actions given.
 	public ArrayList<Laser> getLasers(Ship P1, Ship P2,String[] P1A,String[] P2A,ArrayList<Laser> Lasers)
 	{
 		//gets the moment of time to display from the Game class.
 		int Time = Game.getTime();
 		
+		return MA.Move(P1, P2, P1A, P2A, Lasers, Time);
+	}
+	//Draws the Lasers at the point in time specified from the actions given.
+	public ArrayList<Laser> getLasers(Ship P1, Ship P2,String[] P1A,String[] P2A,ArrayList<Laser> Lasers,int Time)
+	{
 		return MA.Move(P1, P2, P1A, P2A, Lasers, Time);
 	}
 	
