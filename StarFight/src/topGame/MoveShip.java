@@ -34,10 +34,10 @@ public class MoveShip {
 		if (t != 0 && A[T] != null) {
 			S = Action(S, A[T], t);
 		} 
-		else if (T+1 < A.length)
+		else if (T < A.length)
 		{
-			if (A[T+1] == "BRN") {
-				S = Action(S, A[T+1], 1);
+			if (A[T] == "BRN") {
+				S = Action(S, A[T], 10);
 			}
 		}
 		

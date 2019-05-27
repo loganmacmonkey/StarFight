@@ -465,7 +465,7 @@ public class Ship {
 	{
 		int diffx = Math.abs(this.getXInt() - x);
 		int diffy = Math.abs(this.getYInt() - y);
-		return(diffx <= 12*this.getScale() && diffy <= 12*this.getScale());
+		return(diffx <= (Math.pow(this.getScale(),4)) && diffy <= (Math.pow(this.getScale(),4)));
 	}
 
 }
