@@ -9,7 +9,6 @@ import bottomGame.BottomOfGame;
 import main.Main;
 import topGame.SpaceCoordinates;
 import topGame.TopOfGame;
-import types.Laser;
 import types.Ship;
 
 //Takes in how many turns you'd like to decide at a time &
@@ -49,11 +48,11 @@ public class Game {
 		
 		//Takes P1 & 2's selected ships and modifies
 		//them to be ready for the game.
-		P1.setCoordinates(SC.getX(1), SC.getY(1));
+		P1.setCoordinates(SC.getX(2), SC.getY(1));
 		P1.setRotation(90);
 		P1.setScale(Main.getJPanel().getWidth()/480);
 		P1.setMovingRight(true);
-		P2.setCoordinates(SC.getX(16), SC.getY(1));
+		P2.setCoordinates(SC.getX(15), SC.getY(1));
 		P2.setRotation(-90);
 		P2.setScale(Main.getJPanel().getWidth()/480);
 		P2.setMovingRight(false);

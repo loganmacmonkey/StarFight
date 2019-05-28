@@ -67,9 +67,9 @@ public class MoveShip {
 			for(Laser l : Lasers)
 			{
 				if (l.getRotationInt()==90) {
-					l.setX(l.getX() + SC.getSpaceX());
+					l.setX(SC.getX(SC.getXSpace(l)+1));
 				} else {
-					l.setX(l.getX() - SC.getSpaceX());
+					l.setX(SC.getX(SC.getXSpace(l)-1));
 				}
 				//Set any Lasers off the Screen to Black & White.
 				if (l.getXInt() < SC.getSpaceX()*-1 || l.getXInt() > Main.getJPanel().getWidth()+SC.getSpaceX())
@@ -89,9 +89,9 @@ public class MoveShip {
 		for(Laser l : Lasers)
 		{
 			if (l.getRotationInt()==90) {
-				l.setX(l.getX()+((SC.getSpaceX())*t/1000));
+				l.setX(SC.getXD(SC.getXSpace(l) + (double)t/1000));
 			} else {
-				l.setX(l.getX()-((SC.getSpaceX())*t/1000));
+				l.setX(SC.getXD(SC.getXSpace(l) - (double)t/1000));
 			}
 		}
 		//Removes all Black & White Lasers.
@@ -139,11 +139,11 @@ public class MoveShip {
 			{
 				if(S.getRotationInt() == 90)
 				{
-					S.setX(S.getX()+(SC.getSpaceX()*time/1000));
+					S.setX(SC.getXD(SC.getXSpace(S) + (double)time/1000));
 				}
 				else if (S.getRotationInt() == 270)
 				{
-					S.setX(S.getX()-(SC.getSpaceX()*time/1000));
+					S.setX(SC.getXD(SC.getXSpace(S) - (double)time/1000));
 				}
 				else if (S.getRotationInt() == 0)
 				{
@@ -185,11 +185,11 @@ public class MoveShip {
 			{
 				if(S.getRotationInt() == 90)
 				{
-					S.setX(S.getX()-(SC.getSpaceX()*time/4000));
+					S.setX(SC.getXD(SC.getXSpace(S) - (double)time/4000));
 				}
 				else if (S.getRotationInt() == 270)
 				{
-					S.setX(S.getX()+(SC.getSpaceX()*time/4000));
+					S.setX(SC.getXD(SC.getXSpace(S) + (double)time/4000));
 				}
 				else if (S.getRotationInt() == 0)
 				{
@@ -205,19 +205,19 @@ public class MoveShip {
 			{
 				if(S.getRotationInt() == 90)
 				{
-					S.setX(S.getX()+(SC.getSpaceX()*5*time/4000));
+					S.setX(SC.getXD(SC.getXSpaceD(S) + (double)time/800));
 				}
 				else if (S.getRotationInt() == 270)
 				{
-					S.setX(S.getX()-(SC.getSpaceX()*5*time/4000));
+					S.setX(SC.getXD(SC.getXSpaceD(S) - (double)time/800));
 				}
 				else if (S.getRotationInt() == 0)
 				{
-					S.setY(S.getY()-(SC.getSpaceY()*5*time/4000));
+					S.setY(S.getY()-(SC.getSpaceY()*time/800));
 				}
 				else if (S.getRotationInt() == 180)
 				{
-					S.setY(S.getY()+(SC.getSpaceY()*5*time/4000));
+					S.setY(S.getY()+(SC.getSpaceY()*time/800));
 				}
 				break;
 			}
@@ -228,11 +228,11 @@ public class MoveShip {
 				{
 					if (S.getRotationInt() == 90) 
 					{
-						Lasers.add(new Laser(S.getColor(), S.getScale(), SC.getX(SC.getXSpace(S) + 1), S.getYInt(), 90));
+						Lasers.add(new Laser(S.getColor(), S.getScale(), SC.getX(SC.getXSpace(S)+1), S.getYInt(), 90));
 					}
 					else
 					{
-						Lasers.add(new Laser(S.getColor(), S.getScale(), SC.getX(SC.getXSpace(S) - 1), S.getYInt(), 270));
+						Lasers.add(new Laser(S.getColor(), S.getScale(), SC.getX(SC.getXSpace(S)-1), S.getYInt(), 270));
 					}
 				}
 				break;
@@ -243,21 +243,21 @@ public class MoveShip {
 			{
 				if(S.getRotationInt() == 90)
 				{
-					S.setX(S.getX()+((SC.getSpaceX())*time/4000));
+					S.setX(SC.getXD(SC.getXSpaceD(S) + (double)time/4000));
 				}
 				else
 				{
-					S.setX(S.getX()-((SC.getSpaceX())*time/4000));
+					S.setX(SC.getXD(SC.getXSpaceD(S) - (double)time/4000));
 				}
 				if(time == 1000)
 				{
 					if (S.getRotationInt() == 90) 
 					{
-						Lasers.add(new Laser(S.getColor(), S.getScale(), S.getXInt() + SC.getSpaceX(), S.getYInt(), 90));
+						Lasers.add(new Laser(S.getColor(), S.getScale(), SC.getX(SC.getXSpace(S)+1), S.getYInt(), 90));
 					}
 					else
 					{
-						Lasers.add(new Laser(S.getColor(), S.getScale(), S.getXInt() - SC.getSpaceX(), S.getYInt(), 270));
+						Lasers.add(new Laser(S.getColor(), S.getScale(), SC.getX(SC.getXSpace(S)-1), S.getYInt(), 270));
 					}
 				}break;
 			}

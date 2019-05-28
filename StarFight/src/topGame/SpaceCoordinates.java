@@ -16,21 +16,36 @@ public class SpaceCoordinates {
 	//Gets the X value of the space you input
 	public int getX(int Space)
 	{
-		return ((Main.getJPanel().getWidth()*((2*(Space-1))+1))/32);
+		return ((Main.getJPanel().getWidth()*((2*Space)-1))/32);
+	}
+	
+	public double getXD(double Space)
+	{
+		return ((Main.getJPanel().getWidth()*((2*Space)-1))/32);
 	}
 	
 	//Gets the X coordinate of the Space
 	//that the Ship is currently in.
 	public int getXSpace(Ship X)
 	{
-		return ((((32*(X.getXInt()+1))/Main.getJPanel().getWidth())+1)/2);
+		return (int)Math.round(16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5);
+	}
+	
+	public double getXSpaceD(Ship X)
+	{
+		return 16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5;
 	}
 	
 	//Gets the X coordinate of the Space
 	//that the Laser is currently in.
 	public int getXSpace(Laser X)
 	{
-		return ((((32*(X.getXInt()+1))/Main.getJPanel().getWidth())+1)/2);
+		return (int)Math.round(16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5);
+	}
+	
+	public double getXSpaceD(Laser X)
+	{
+		return 16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5;
 	}
 	
 	//Gets the distance for a ship to go up or down one space.

@@ -48,7 +48,7 @@ public class Main {
 		f = new JFrame("StarFight!");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(FSize);
-		f.setResizable(true);
+		f.setResizable(false);
 		f.setLocation(0,(int)(SHeight / 2.0 - (SWidth / 8.0)));
 		
 		//Adds Main Panel to the Frame

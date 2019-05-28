@@ -15,6 +15,9 @@ public class CreateActions {
 	//Creates the class which moves the ship.
 	MoveShip MS = new MoveShip();
 	
+	//Allows to convert raw X & Y values to usable game coordinates.
+	SpaceCoordinates SC = new SpaceCoordinates();
+	
 	//Returns a List of actions for the ship to
 	//do to complete the moves given.
 	public String[] CA(Ship S, String[] M)
@@ -92,7 +95,7 @@ public class CreateActions {
 			Ship m = MS.Move(M.clone(), MA, (i+1)*250);
 			for  (Laser l : CheckLasers)
 			{
-				if(m.ContainsPoint(l.getXInt(), l.getYInt()))
+				if(SC.getXSpace(m) == SC.getXSpace(l) && SC.getYSpace(m) == SC.getYSpace(l))
 					{
 						int I = Math.floorDiv(i*250, 1000);
 						System.out.println(I);
