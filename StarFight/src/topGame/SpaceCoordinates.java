@@ -31,6 +31,11 @@ public class SpaceCoordinates {
 		return (int)Math.round(16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5);
 	}
 	
+	public double getAXSpace(Ship X)
+	{
+		return (double)(Math.round((16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5)*2.0)/2.0);
+	}
+	
 	public double getXSpaceD(Ship X)
 	{
 		return 16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5;
@@ -41,6 +46,11 @@ public class SpaceCoordinates {
 	public int getXSpace(Laser X)
 	{
 		return (int)Math.round(16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5);
+	}
+	
+	public double getAXSpace(Laser X)
+	{
+		return (double)(Math.round((16.0*X.getX()/(double)Main.getJPanel().getWidth() + 0.5)*2.0)/2.0);
 	}
 	
 	public double getXSpaceD(Laser X)
@@ -81,6 +91,22 @@ public class SpaceCoordinates {
 		}
 	}
 	
+	public double getAYSpace(Ship Y)
+	{
+		if (Y.getYInt() < 70)
+		{
+			return 2;
+		}
+		else if (Y.getYInt() < 170)
+		{
+			return 1.5;
+		}
+		else
+		{
+			return 2;
+		}
+	}
+	
 	//Gets the X coordinate of the Space
 	//that the Laser is currently in.
 	public int getYSpace(Laser Y)
@@ -88,6 +114,22 @@ public class SpaceCoordinates {
 		if (Y.getYInt() > 120)
 		{
 			return 1;
+		}
+		else
+		{
+			return 2;
+		}
+	}
+	
+	public double getAYSpace(Laser Y)
+	{
+		if (Y.getYInt() < 70)
+		{
+			return 1;
+		}
+		else if (Y.getYInt() < 170)
+		{
+			return 1.5;
 		}
 		else
 		{
