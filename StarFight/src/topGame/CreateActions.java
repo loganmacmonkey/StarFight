@@ -80,7 +80,7 @@ public class CreateActions {
 			NMA[i] = MA[i];
 		}
 		
-		for(int i = 0;i < MA.length*4;i++)
+		for(int i = 0;i < MA.length*2;i++)
 		{
 			ArrayList<Laser> CheckLasers = new ArrayList<Laser>();
 			ArrayList<Laser> L = new ArrayList<Laser>();
@@ -88,20 +88,19 @@ public class CreateActions {
 			{
 				L.add(l);
 			}
-			for (Laser l : MS.Move(M.clone(), S.clone(), MA, SA, L, (i+1)*250))
+			for (Laser l : MS.Move(M.clone(), S.clone(), MA, SA, L, (i+1)*500))
 			{
 				CheckLasers.add(l);
 			}
-			Ship m = MS.Move(M.clone(), MA, (i+1)*250);
+			Ship m = MS.Move(M.clone(), MA, (i+1)*500);
 			for  (Laser l : CheckLasers)
 			{
 				if(SC.getXSpace(m) == SC.getXSpace(l) && SC.getYSpace(m) == SC.getYSpace(l))
 					{
-						int I = Math.floorDiv(i*250, 1000);
-						System.out.println(I);
+						int I = Math.floorDiv((i+1)*500, 1000);
 						for (int k = I+1;k<MA.length+1;k++)
 						{
-							if (k == I+1 && NMA[k]!="D")
+							if (k == I+1 && NMA[k] != "D")
 							{
 								NMA[k] = "BRN";
 							}
@@ -113,14 +112,13 @@ public class CreateActions {
 						return NMA;
 					}
 			}
-			Ship s = MS.Move(S.clone(), SA, (i+1)*250);
+			Ship s = MS.Move(S.clone(), SA, (i+1)*500);
 			if(m.ContainsPoint(s.getXInt(), s.getYInt()))
 			{
-				int I = Math.floorDiv(i*250, 1000);
-				System.out.println(I);
+				int I = Math.floorDiv((i+1)*500, 1000);
 				for (int k = I+1;k<MA.length+1;k++)
 				{
-					if (k == I+1 && NMA[k]!="D")
+					if (k == I+1 && NMA[k] != "D")
 					{
 						NMA[k] = "BRN";
 					}

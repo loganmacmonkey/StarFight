@@ -20,6 +20,9 @@ public class TopOfGame {
 	//Creates the class which creates the ships actions.
 	static CreateActions CA = new CreateActions();
 	
+	//Allows to convert raw X & Y values to usable game coordinates.
+	SpaceCoordinates SC = new SpaceCoordinates();
+	
 	//Create the class which draws the ships moving.
 	static PlayTop PT = new PlayTop();
 	
@@ -80,11 +83,10 @@ public class TopOfGame {
 			
 			//Draw all the Lasers from both ships in the point
 			//in time specified from the actions given
+			
 			for(Laser L : PT.getLasers(P1.clone(),P2.clone(),P1Actions,P2Actions,getLasers()))
 			{
 				L.drawLaser(g, J);
-				//System.out.println(PT.getMovedShip(getP2(),P2Actions).getXInt() - L.getXInt());
-				//System.out.println(PT.getMovedShip(getP2(),P2Actions).ContainsPoint(L.getXInt(), L.getYInt()));
 			}
 		}
 		//If in selecting mode, draw the ships in the

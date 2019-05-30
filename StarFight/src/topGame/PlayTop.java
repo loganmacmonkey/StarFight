@@ -13,11 +13,13 @@ public class PlayTop {
 	//Create the class which moves the ships for us.
 	MoveShip MA = new MoveShip();
 	
+	SpaceCoordinates SC = new SpaceCoordinates();
+	
 	//Creates a moved Ship for a point in time specified from the actions given.
 	public Ship getMovedShip(Ship S, String[] A)
 	{
 		//gets the moment of time to display from the Game class.
-		int Time = Game.getTime();
+		int Time = Game.getTime();		
 		
 		return MA.Move(S, A, Time);
 	}

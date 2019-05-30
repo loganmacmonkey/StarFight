@@ -37,7 +37,7 @@ public class MoveShip {
 		else if (T < A.length)
 		{
 			if (A[T] == "BRN") {
-				S = Action(S, A[T], 10);
+				S = Action(S, A[T], 1);
 			}
 		}
 		
@@ -86,14 +86,29 @@ public class MoveShip {
 		
 		//Draws the Laser part ways to the next space.
 		int t = time%1000;
-		for(Laser l : Lasers)
+		if (t != 0)
 		{
-			if (l.getRotationInt()==90) {
-				l.setX(SC.getXD(SC.getXSpace(l) + (double)t/1000));
-			} else {
-				l.setX(SC.getXD(SC.getXSpace(l) - (double)t/1000));
+		for(Laser l : Lasers)
+			{
+				if (l.getRotationInt()==90) {
+					l.setX(SC.getXD(SC.getXSpace(l) + (double)t/1000));
+				} else {
+					l.setX(SC.getXD(SC.getXSpace(l) - (double)t/1000));
+				}
 			}
 		}
+		else if (T < A1.length)
+		{
+			if (A1[T] == "BRN") 
+			{
+				P1 = Action(P1, A1[T], 1);
+			}
+			if (A2[T] == "BRN") 
+			{
+				P2 = Action(P2, A2[T], 1);
+			}
+		}
+		
 		//Removes all Black & White Lasers.
 		for(int i = 0;i<Lasers.size();i++)
 		{
