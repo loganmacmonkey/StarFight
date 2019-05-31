@@ -93,7 +93,8 @@ public class CreateActions {
 			//Adds all the Lasers from "Lasers" into L.
 			for (Laser l : Lasers)
 			{
-				L.add(l);
+				Laser Laser = new Laser(l.getColorNum(), l.getScale(), l.getXInt(), l.getYInt(), l.getRotationInt());
+				L.add(Laser);
 			}
 			
 			//Moves all the Lasers and adds all the newly made or moved ones into
@@ -128,9 +129,9 @@ public class CreateActions {
 					}
 			}
 			Ship s = MS.Move(S.clone(), SA, (i+1)*500);
-			if(m.ContainsPoint(s.getXInt(), s.getYInt()))
+			if(SC.getAXSpace(m) == SC.getAXSpace(s) && SC.getAYSpace(m) == SC.getAYSpace(s))
 			{
-				int I = Math.floorDiv((i)*500, 1000);
+				int I = (i+1)*500%1000 != 0 ? Math.floorDiv((i+1)*500, 1000) + 1 : Math.floorDiv((i+1)*500, 1000);
 				for (int k = I;k<MA.length+1;k++)
 				{
 					if (k == I && NMA[k] != "D")

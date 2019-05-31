@@ -81,7 +81,7 @@ public class SpaceCoordinates {
 	//that the Ship is currently in.
 	public int getYSpace(Ship Y)
 	{
-		if (Y.getYInt() > 120)
+		if (Y.getYInt() > Main.getJPanel().getHeight()/4)
 		{
 			return 1;
 		}
@@ -93,17 +93,17 @@ public class SpaceCoordinates {
 	
 	public double getAYSpace(Ship Y)
 	{
-		if (Y.getYInt() < 70)
+		if (Y.getYInt() < Main.getJPanel().getHeight()/8 + 5)
 		{
 			return 2;
 		}
-		else if (Y.getYInt() < 170)
+		else if (Y.getYInt() < Main.getJPanel().getHeight()*3/8 - 5)
 		{
 			return 1.5;
 		}
 		else
 		{
-			return 2;
+			return 1;
 		}
 	}
 	
@@ -111,7 +111,7 @@ public class SpaceCoordinates {
 	//that the Laser is currently in.
 	public int getYSpace(Laser Y)
 	{
-		if (Y.getYInt() > 120)
+		if (Y.getYInt() > Main.getJPanel().getHeight()/4)
 		{
 			return 1;
 		}
@@ -123,17 +123,17 @@ public class SpaceCoordinates {
 	
 	public double getAYSpace(Laser Y)
 	{
-		if (Y.getYInt() < 70)
+		if (Y.getYInt() < Main.getJPanel().getHeight()/8 + 5)
 		{
-			return 1;
+			return 2;
 		}
-		else if (Y.getYInt() < 170)
+		else if (Y.getYInt() < Main.getJPanel().getHeight()*3/8 - 5)
 		{
 			return 1.5;
 		}
 		else
 		{
-			return 2;
+			return 1;
 		}
 	}
 	
