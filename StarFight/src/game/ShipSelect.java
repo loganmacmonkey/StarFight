@@ -72,7 +72,7 @@ public class ShipSelect {
 		//for the first Panel.
 		PSS1.addMouseListener(new MouseListener() {
 			
-			//if mouse is clicked is clicked, trigger.
+			//if mouse is clicked, trigger.
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
